@@ -1,10 +1,10 @@
 # Spotify Clone 🎧
 
-![icon_logo](https://github.com/varun-FSDeveloper/BTreeFlight/assets/153975508/7b010aed-1466-46e3-8636-891bf59dcb25)
+
 
 Welcome to the **Spotify Clone** project! This repository showcases a sleek and responsive clone of Spotify, built using **React** and **Tailwind CSS**. It replicates Spotify's user-friendly interface and offers a dynamic and responsive design experience.
 
-For more about **BTree Systems**, visit [our website](https://btreesystems.com).
+
 
 ---
 
@@ -44,7 +44,7 @@ Follow these steps to set up and run the project locally:
 
 1. **Clone the Repository**  
    ```bash
-   git clone https://github.com/BTREE-SYSTEMS/SpotifyClone.git
+   git clone https://github.com/hariharan1022/Spotify-Clone
 
 2. **Navigate to the Project Directory**  
    ```bash
@@ -76,11 +76,9 @@ Once the server starts, open your web browser and go to http://localhost:3000 to
 
 ### Our Other Social Platforms
 
-- ![Untitled design (9)](https://github.com/varun-FSDeveloper/BTreeFlight/assets/153975508/33ae95e1-c4d7-47d3-a160-90a6f060896b) Youtube - https://bit.ly/Youtubebtree
-- ![icon_logo](https://github.com/varun-FSDeveloper/BTreeFlight/assets/153975508/948141f8-8cdc-4ef1-9615-0fb06cd35574) Instagram - https://bit.ly/Instagrambtree 
-- ![Untitled design (10)](https://github.com/varun-FSDeveloper/BTreeFlight/assets/153975508/51189b66-5f75-43fc-a992-dca4805152a0) Facebook - https://bit.ly/btreefacebookpage 
-- ![Untitled design (11)](https://github.com/varun-FSDeveloper/BTreeFlight/assets/153975508/0177cf07-7034-41fb-a41c-e292b2eea000) LinkedIn - https://bit.ly/Linkedinbtree 
-- ![Untitled design (13)](https://github.com/varun-FSDeveloper/BTreeFlight/assets/153975508/81b02b10-6291-4aeb-8f14-d3f296f2698b) Twitter - https://bit.ly/Twitterbtree 
 
+- ![icon_logo](https://github.com/varun-FSDeveloper/BTreeFlight/assets/153975508/948141f8-8cdc-4ef1-9615-0fb06cd35574) Instagram - https://www.instagram.com/hari_mahesh_sk?igsh=MTJtajBsZHF0aDcy
+- ![Untitled design (10)](https://github.com/varun-FSDeveloper/BTreeFlight/assets/153975508/51189b66-5f75-43fc-a992-dca4805152a0) Facebook -https://www.facebook.com/share/17pCE9MhmH/
+- ![Untitled design (11)](https://github.com/varun-FSDeveloper/BTreeFlight/assets/153975508/0177cf07-7034-41fb-a41c-e292b2eea000) LinkedIn - https://www.linkedin.com/in/hariharan-s-92b566381?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app
 
--- varunDev#
+-- Hariharan#

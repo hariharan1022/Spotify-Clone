@@ -20,59 +20,58 @@ const PlayerContextProvider = (props) => {
       minute: "-- ",
     },
   });
+  const [searchQuery, setSearchQuery] = useState('');
 
-  useEffect(()=>{
-    setTimeout(()=>{
-        audioRef.current.ontimeupdate = ()=>{
-            seekBar.current.style.width = ((audioRef.current.currentTime / audioRef.current.duration)*100)+ "%"
-            setTime({
-                currentTime: {
-                  second: Math.floor(audioRef.current.currentTime % 60),
-                  minute: Math.floor(audioRef.current.currentTime / 60),
-                },
-                totalTime: {
-                    second: Math.floor(audioRef.current.duration % 60),
-                    minute: Math.floor(audioRef.current.duration / 60),
-                },
-              })
-        }
-    },1000)
-  },[audioRef])
+  useEffect(() => {
+    setTimeout(() => {
+      audioRef.current.ontimeupdate = () => {
+        seekBar.current.style.width = ((audioRef.current.currentTime / audioRef.current.duration) * 100) + "%"
+        setTime({
+          currentTime: {
+            second: Math.floor(audioRef.current.currentTime % 60),
+            minute: Math.floor(audioRef.current.currentTime / 60),
+          },
+          totalTime: {
+            second: Math.floor(audioRef.current.duration % 60),
+            minute: Math.floor(audioRef.current.duration / 60),
+          },
+        })
+      }
+    }, 1000)
+  }, [audioRef])
 
-  const play= ()=>{
+  const play = () => {
     audioRef.current.play();
     setPlayStatus(true);
   }
-  const pause= ()=>{
+  const pause = () => {
     audioRef.current.pause();
     setPlayStatus(false);
   }
 
-  const playWithId = async (id)=>{
+  const playWithId = async (id) => {
     await setTrack(songsData[id])
     await audioRef.current.play();
     setPlayStatus(true);
   }
 
-  const before = async ()=>{
-    if(track.id > 0)
-    {
-        await setTrack(songsData[track.id -1])
-        await audioRef.current.play();
-        setPlayStatus(true);
+  const before = async () => {
+    if (track.id > 0) {
+      await setTrack(songsData[track.id - 1])
+      await audioRef.current.play();
+      setPlayStatus(true);
     }
   }
-  const after = async ()=>{
-    if(track.id < songsData.length - 1)
-    {
-        await setTrack(songsData[track.id + 1])
-        await audioRef.current.play();
-        setPlayStatus(true);
+  const after = async () => {
+    if (track.id < songsData.length - 1) {
+      await setTrack(songsData[track.id + 1])
+      await audioRef.current.play();
+      setPlayStatus(true);
     }
   }
 
-  const seekBgClick = async (e)=>{
-   audioRef.current.currentTime = ((e.nativeEvent.offsetX / seekBg.current.offsetWidth) * audioRef.current.duration)
+  const seekBgClick = async (e) => {
+    audioRef.current.currentTime = ((e.nativeEvent.offsetX / seekBg.current.offsetWidth) * audioRef.current.duration)
   }
   const contextValue = {
     audioRef,
@@ -89,7 +88,9 @@ const PlayerContextProvider = (props) => {
     playWithId,
     before,
     after,
-    seekBgClick
+    seekBgClick,
+    searchQuery,
+    setSearchQuery
   };
 
   return (

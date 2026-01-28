@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import {assets, songsData} from '../assets/assets'
 import { useNavigate } from 'react-router-dom'
 
-const Sidebar = () => {
+const Sidebar = ({ onLogout }) => {
 
     const nav = useNavigate();
     const [showSearch, setShowSearch] = useState(false);
@@ -130,6 +130,19 @@ const Sidebar = () => {
                     </div>
                 </>
             )}
+        </div>
+        
+        {/* Logout Button */}
+        <div className='bg-[#1a1a1a] h-[10%] rounded-lg flex items-center justify-center border border-[#282828] hover:border-red-500 transition'>
+            <button 
+                onClick={onLogout}
+                className='px-6 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition font-bold flex items-center gap-2'
+            >
+                <svg className='w-5 h-5' fill='currentColor' viewBox='0 0 20 20'>
+                    <path fillRule='evenodd' d='M3 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z' clipRule='evenodd' />
+                </svg>
+                Logout
+            </button>
         </div>
     </div>
   )

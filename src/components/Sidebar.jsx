@@ -8,6 +8,7 @@ const Sidebar = () => {
     const [showSearch, setShowSearch] = useState(false);
     const [searchQuery, setSearchQuery] = useState('');
     const [library, setLibrary] = useState([]);
+    const [showAddSongs, setShowAddSongs] = useState(false);
 
     const handleSearch = (query) => {
         setSearchQuery(query);
@@ -16,7 +17,12 @@ const Sidebar = () => {
     const addToLibrary = (song) => {
         if (!library.find(s => s.id === song.id)) {
             setLibrary([...library, song]);
+            setShowAddSongs(false);
         }
+    };
+
+    const removeFromLibrary = (songId) => {
+        setLibrary(library.filter(s => s.id !== songId));
     };
 
   return (
@@ -42,25 +48,61 @@ const Sidebar = () => {
                 </div>
             )}
         </div>
-        <div className='bg-[#121212] h-[85%] rounded overflow-y-auto'>
-            <div className='p-4 flex items-center justify-between'>
+        <div className='bg-[#121212] h-[85%] rounded overflow-y-auto relative'>
+            <div className='p-4 flex items-center justify-between sticky top-0 bg-[#121212]'>
                 <div className='flex items-center gap-3'>
                     <img className='w-8' src={assets.stack_icon} alt="" />
                     <p className='font-semibold'>Your Library ({library.length})</p>
                 </div>
                 <div className='flex items-center gap-3'>
                 <img className='w-5' src={assets.arrow_icon} alt="" />
-                <img className='w-5' src={assets.plus_icon} alt="" />
+                <img 
+                    onClick={() => setShowAddSongs(!showAddSongs)} 
+                    className='w-5 cursor-pointer hover:text-green-500' 
+                    src={assets.plus_icon} 
+                    alt="add" 
+                />
             </div>
             </div>
+
+            {showAddSongs && (
+                <div className='p-4 bg-[#242424] m-2 rounded'>
+                    <h3 className='font-bold mb-3 text-green-500'>Add Songs to Library</h3>
+                    <div className='max-h-[300px] overflow-y-auto'>
+                        {songsData.map((song) => (
+                            <div key={song.id} className='p-2 bg-[#1a1a1a] rounded mb-2 flex items-center justify-between'>
+                                <div className='flex-1'>
+                                    <p className='font-semibold text-sm'>{song.name}</p>
+                                    <p className='text-gray-400 text-xs'>{song.desc}</p>
+                                </div>
+                                <button 
+                                    onClick={() => addToLibrary(song)}
+                                    disabled={library.find(s => s.id === song.id)}
+                                    className='ml-2 px-3 py-1 bg-green-500 text-black rounded text-sm font-bold hover:bg-green-400 disabled:opacity-50 disabled:cursor-not-allowed'
+                                >
+                                    {library.find(s => s.id === song.id) ? 'Added' : 'Add'}
+                                </button>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            )}
             
             {library.length > 0 ? (
                 <div className='p-4'>
-                    <h3 className='font-bold mb-3'>Liked Songs</h3>
+                    <h3 className='font-bold mb-3 text-green-500'>Your Liked Songs</h3>
                     {library.map((song) => (
-                        <div key={song.id} className='p-2 bg-[#242424] rounded mb-2 text-sm'>
-                            <p className='font-semibold'>{song.name}</p>
-                            <p className='text-gray-400 text-xs'>{song.desc}</p>
+                        <div key={song.id} className='p-2 bg-[#242424] rounded mb-2 flex items-center justify-between group'>
+                            <div className='flex-1 min-w-0'>
+                                <p className='font-semibold text-sm truncate'>{song.name}</p>
+                                <p className='text-gray-400 text-xs truncate'>{song.desc}</p>
+                            </div>
+                            <button 
+                                onClick={() => removeFromLibrary(song.id)}
+                                className='ml-2 text-red-500 hover:text-red-400 opacity-0 group-hover:opacity-100 transition-opacity'
+                            >
+                                ✕
+                            </button>
                         </div>
                     ))}
                 </div>

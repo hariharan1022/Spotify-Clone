@@ -9,15 +9,17 @@ function Display() {
   const loc = useLocation();
   const isAlbum = loc.pathname.includes("album");
   const albumID = isAlbum?loc.pathname.slice(-1):"";
-  const bgclr = albumsData[Number(albumID)].bgColor;
+  const bgclr = isAlbum && albumsData[Number(albumID)] ? albumsData[Number(albumID)].bgColor : "#121212";
 
      useEffect(()=>{
-      if(isAlbum)
-      {
-        displayref.current.style.background = `linear-gradient(${bgclr},#121212)`;
-      }
-      else{
-        displayref.current.style.background = "#121212";
+      if(displayref.current) {
+        if(isAlbum && albumsData[Number(albumID)])
+        {
+          displayref.current.style.background = `linear-gradient(${bgclr},#121212)`;
+        }
+        else{
+          displayref.current.style.background = "#121212";
+        }
       }
      })
   return (

@@ -130,48 +130,6 @@ const Sidebar = () => {
                     </div>
                 </>
             )}
-        </div>                                    className='ml-2 px-3 py-1 bg-green-500 text-black rounded text-sm font-bold hover:bg-green-400 disabled:opacity-50 disabled:cursor-not-allowed'
-                                >
-                                    {library.find(s => s.id === song.id) ? 'Added' : 'Add'}
-                                </button>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            )}
-            
-            {library.length > 0 ? (
-                <div className='p-4'>
-                    <h3 className='font-bold mb-3 text-green-500'>Your Liked Songs</h3>
-                    {library.map((song) => (
-                        <div key={song.id} className='p-2 bg-[#242424] rounded mb-2 flex items-center justify-between group'>
-                            <div className='flex-1 min-w-0'>
-                                <p className='font-semibold text-sm truncate'>{song.name}</p>
-                                <p className='text-gray-400 text-xs truncate'>{song.desc}</p>
-                            </div>
-                            <button 
-                                onClick={() => removeFromLibrary(song.id)}
-                                className='ml-2 text-red-500 hover:text-red-400 opacity-0 group-hover:opacity-100 transition-opacity'
-                            >
-                                ✕
-                            </button>
-                        </div>
-                    ))}
-                </div>
-            ) : (
-                <>
-                    <div className='p-4 bg-[#242424] m-2 rounded font-semibold flex flex-col items-start justify-start gap-1 pl-4'>
-                        <h1>Create your first Playlist</h1>
-                        <p className='font-light'>it's easy we will help you</p>
-                        <button className='px-4 py-1.5 bg-white text-[15px] text-black rounded-full mt-4'>Create playlist</button>
-                    </div>
-                    <div className='p-4 bg-[#242424] m-2 rounded font-semibold flex flex-col items-start justify-start gap-1 pl-4 mt-4'>
-                        <h1>Find some Podcasts to Follow</h1>
-                        <p className='font-light'>we'll keep you update on new episodes</p>
-                        <button className='px-4 py-1.5 bg-white text-[15px] text-black rounded-full mt-4'>Browse Podcasts</button>
-                    </div>
-                </>
-            )}
         </div>
     </div>
   )

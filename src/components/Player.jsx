@@ -61,3 +61,9 @@ const Player = () => {
         <img className="w-4 cursor-pointer" src={assets.speaker_icon} alt="" />
         <img className="w-4 cursor-pointer" src={assets.volume_icon} alt="" />
         <div className="w-24 bg-[#404040] h-1 rounded cursor-pointer hover:bg-[#1db954]"></div>
+      </div>
+    </div>
+  );
+};
+
+export default Player;

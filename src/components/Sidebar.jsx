@@ -1,21 +1,33 @@
-import React, { useState, useContext } from 'react'
-import { assets, songsData } from '../assets/assets'
-import { PlayerContext } from '../context/PlayerContext'
-import { useNavigate } from 'react-router-dom'
+import React, { useState, useContext, useEffect } from 'react';
+import { assets, songsData } from '../assets/assets';
+import { PlayerContext } from '../context/PlayerContext';
+import { useNavigate } from 'react-router-dom';
 
 const Sidebar = ({ onLogout }) => {
     const nav = useNavigate();
-    const { setSearchQuery } = useContext(PlayerContext); // Use context
+    const { setSearchQuery } = useContext(PlayerContext) || {};
     const [showSearch, setShowSearch] = useState(false);
-    const [localSearchQuery, setLocalSearchQuery] = useState(''); // Local state for input
-    const [library, setLibrary] = useState([]);
+    const [localSearchQuery, setLocalSearchQuery] = useState('');
+    const [library, setLibrary] = useState(() => {
+        try {
+            const saved = localStorage.getItem('spotify_library');
+            const parsed = saved ? JSON.parse(saved) : [];
+            return Array.isArray(parsed) ? parsed : [];
+        } catch (error) {
+            return [];
+        }
+    });
     const [showAddSongs, setShowAddSongs] = useState(false);
+
+    useEffect(() => {
+        localStorage.setItem('spotify_library', JSON.stringify(library));
+    }, [library]);
 
     const handleSearch = (query) => {
         setLocalSearchQuery(query);
-        setSearchQuery(query); // Update global context
+        if (setSearchQuery) setSearchQuery(query);
         if (query.length > 0) {
-            nav('/'); // Navigate to home to show results
+            nav('/');
         }
     };
 
@@ -31,71 +43,66 @@ const Sidebar = ({ onLogout }) => {
     };
 
     return (
-        <div className='w-[25%] h-full p-2 flex-col gap-2 text-white hidden lg:flex bg-gradient-to-b from-[#121212] to-black'>
-            {/* Spotify Logo/Home Section */}
-            <div className='bg-gradient-to-b from-[#1db954] to-[#1aa34a] h-[12%] rounded-lg flex flex-col justify-center items-center p-4 text-black font-bold text-2xl'>
-                <p>♫ Spotify</p>
-            </div>
-
+        <div className='w-[25%] h-full p-2 flex-col gap-2 text-gray-300 hidden lg:flex bg-black'>
             {/* Navigation */}
-            <div className='bg-[#1a1a1a] h-[15%] rounded-lg flex flex-col justify-around border border-[#282828] hover:border-[#1db954] transition'>
-                <div onClick={() => nav('/')} className='flex items-center gap-4 pl-6 cursor-pointer hover:text-[#1db954] transition py-2'>
-                    <img className='w-6' src={assets.home_icon} alt="" />
-                    <p className='font-semibold'>Home</p>
+            <div className='bg-[#121212] h-auto rounded-lg flex flex-col justify-around p-2'>
+                <div onClick={() => nav('/')} className='flex items-center gap-4 pl-4 cursor-pointer hover:text-white transition-all duration-300 py-2'>
+                    <img className='w-6' src={assets.home_icon} alt="Home" />
+                    <p className='font-bold'>Home</p>
                 </div>
-                <div onClick={() => setShowSearch(!showSearch)} className='flex items-center gap-4 pl-6 cursor-pointer hover:text-[#1db954] transition py-2'>
-                    <img className='w-6' src={assets.search_icon} alt="" />
-                    <p className='font-semibold'>Search</p>
+                <div onClick={() => setShowSearch(!showSearch)} className='flex items-center gap-4 pl-4 cursor-pointer hover:text-white transition-all duration-300 py-2'>
+                    <img className='w-6' src={assets.search_icon} alt="Search" />
+                    <p className='font-bold'>Search</p>
                 </div>
                 {showSearch && (
-                    <div className='flex items-center gap-2 pl-6 pr-4 py-2'>
+                    <div className='flex items-center gap-2 pl-4 pr-2 py-2'>
                         <input
                             type="text"
-                            placeholder="Search songs..."
+                            placeholder="Search your songs..."
                             value={localSearchQuery}
                             onChange={(e) => handleSearch(e.target.value)}
-                            className='flex-1 px-3 py-2 rounded-lg bg-[#282828] text-white text-sm focus:outline-none focus:border-[#1db954]'
+                            className='flex-1 px-3 py-2 rounded-md bg-[#282828] text-white text-sm focus:outline-none focus:ring-2 focus:ring-[#1db954]'
                         />
                     </div>
                 )}
             </div>
 
             {/* Your Library */}
-            <div className='bg-[#1a1a1a] h-[73%] rounded-lg overflow-y-auto relative border border-[#282828]'>
-                <div className='p-4 flex items-center justify-between sticky top-0 bg-[#1a1a1a] border-b border-[#282828]'>
+            <div className='bg-[#121212] flex-grow rounded-lg overflow-y-auto relative'>
+                <div className='p-4 flex items-center justify-between sticky top-0 bg-[#121212]'>
                     <div className='flex items-center gap-3'>
-                        <img className='w-6' src={assets.stack_icon} alt="" />
+                        <img className='w-6' src={assets.stack_icon} alt="Library" />
                         <p className='font-bold text-sm'>Your Library</p>
-                        <span className='bg-[#1db954] text-black text-xs rounded-full px-2 py-0.5 font-bold'>{library.length}</span>
                     </div>
                     <div className='flex items-center gap-2'>
-                        <img className='w-4 cursor-pointer hover:text-[#1db954] transition' src={assets.arrow_icon} alt="" />
                         <img
                             onClick={() => setShowAddSongs(!showAddSongs)}
-                            className='w-5 cursor-pointer hover:text-[#1db954] transition font-bold'
+                            className='w-5 h-5 cursor-pointer hover:scale-110 transition-transform font-bold'
                             src={assets.plus_icon}
-                            alt="add"
+                            alt="Add to library"
                             title="Add songs to library"
                         />
+                        <img className='w-4 h-4 cursor-pointer hover:scale-110 transition-transform' src={assets.arrow_icon} alt="" />
                     </div>
                 </div>
 
                 {showAddSongs && (
-                    <div className='p-4 bg-gradient-to-b from-[#1db954]/20 to-[#121212] m-2 rounded-lg border border-[#1db954]/30'>
-                        <h3 className='font-bold mb-3 text-[#1db954] text-sm'>+ Add Songs to Library</h3>
-                        <div className='max-h-[250px] overflow-y-auto'>
+                    <div className='p-4 bg-gradient-to-b from-[#1db954]/10 to-[#121212] m-2 rounded-lg border border-white/10'>
+                        <h3 className='font-bold mb-3 text-white text-sm'>Add Songs to Library</h3>
+                        <div className='max-h-[200px] overflow-y-auto pr-2'>
                             {songsData.map((song) => (
-                                <div key={song.id} className='p-2 bg-[#282828] rounded mb-2 flex items-center justify-between hover:bg-[#333333] transition'>
+                                <div key={song.id} className='p-2 bg-[#282828] rounded mb-2 flex items-center justify-between hover:bg-[#383838] transition-all duration-300'>
                                     <div className='flex-1 min-w-0'>
                                         <p className='font-semibold text-xs truncate'>{song.name}</p>
-                                        <p className='text-gray-500 text-xs truncate'>{song.desc}</p>
+
+                                        <p className='text-gray-400 text-xs truncate'>{song.desc}</p>
                                     </div>
                                     <button
                                         onClick={() => addToLibrary(song)}
                                         disabled={library.find(s => s.id === song.id)}
-                                        className='ml-2 px-2 py-1 bg-[#1db954] text-black rounded text-xs font-bold hover:bg-[#1ed760] disabled:opacity-50 disabled:cursor-not-allowed transition'
+                                        className='ml-2 px-3 py-1 bg-[#1db954] text-black rounded-full text-xs font-bold hover:bg-[#1ed760] disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300'
                                     >
-                                        {library.find(s => s.id === song.id) ? '✓' : '+'}
+                                        {library.find(s => s.id === song.id) ? 'Added' : 'Add'}
                                     </button>
                                 </div>
                             ))}
@@ -104,17 +111,20 @@ const Sidebar = ({ onLogout }) => {
                 )}
 
                 {library.length > 0 ? (
-                    <div className='p-4'>
-                        <h3 className='font-bold mb-3 text-[#1db954] text-sm border-b border-[#282828] pb-2'>Your Liked Songs</h3>
+                    <div className='p-2'>
+                        <h3 className='font-bold mb-3 text-white text-sm px-2'>Liked Songs</h3>
                         {library.map((song) => (
-                            <div key={song.id} className='p-2 bg-[#282828] rounded mb-2 flex items-center justify-between group hover:bg-[#333333] transition'>
-                                <div className='flex-1 min-w-0'>
-                                    <p className='font-semibold text-xs truncate'>{song.name}</p>
-                                    <p className='text-gray-500 text-xs truncate'>{song.desc}</p>
+                            <div key={song.id} className='p-2 rounded mb-2 flex items-center justify-between group hover:bg-[#282828] transition-all duration-300 cursor-pointer'>
+                                <div className='flex-1 min-w-0 flex items-center gap-3'>
+                                    <img src={song.image} className="w-10 h-10 rounded" alt={song.name} />
+                                    <div>
+                                        <p className='font-semibold text-sm truncate text-white'>{song.name}</p>
+                                        <p className='text-gray-400 text-xs truncate'>{song.desc}</p>
+                                    </div>
                                 </div>
                                 <button
                                     onClick={() => removeFromLibrary(song.id)}
-                                    className='ml-2 text-red-500 hover:text-red-400 opacity-0 group-hover:opacity-100 transition font-bold'
+                                    className='ml-2 text-gray-400 hover:text-white opacity-0 group-hover:opacity-100 transition-opacity font-bold'
                                 >
                                     ✕
                                 </button>
@@ -122,35 +132,32 @@ const Sidebar = ({ onLogout }) => {
                         ))}
                     </div>
                 ) : (
-                    <>
-                        <div className='p-4 bg-gradient-to-br from-[#282828] to-[#1a1a1a] m-2 rounded-lg font-semibold flex flex-col items-start justify-start gap-2 border border-[#1db954]/30 hover:border-[#1db954] transition'>
-                            <h1 className='text-white'>📋 Create Playlist</h1>
-                            <p className='font-light text-xs text-gray-300'>Make your first playlist</p>
-                            <button className='px-4 py-1 bg-[#1db954] text-black rounded-full mt-2 text-xs font-bold hover:bg-[#1ed760] transition'>Create</button>
+                    <div className='p-4'>
+                        <div className='p-4 bg-[#242424] m-2 rounded-lg font-semibold flex flex-col items-start justify-start gap-2 border border-white/10 hover:border-white/20 transition-all duration-300'>
+                            <h1 className='text-white font-bold'>Create your first playlist</h1>
+                            <p className='font-light text-sm'>It's easy, we'll help you</p>
+                            <button className='px-4 py-1.5 bg-white text-black rounded-full mt-3 text-xs font-bold hover:bg-gray-200 hover:scale-105 transition-transform duration-300'>Create playlist</button>
                         </div>
-                        <div className='p-4 bg-gradient-to-br from-[#282828] to-[#1a1a1a] m-2 rounded-lg font-semibold flex flex-col items-start justify-start gap-2 border border-[#1db954]/30 hover:border-[#1db954] transition'>
-                            <h1 className='text-white'>🎙️ Podcasts</h1>
-                            <p className='font-light text-xs text-gray-300'>Discover podcasts</p>
-                            <button className='px-4 py-1 bg-[#1db954] text-black rounded-full mt-2 text-xs font-bold hover:bg-[#1ed760] transition'>Explore</button>
+                        <div className='p-4 bg-[#242424] m-2 rounded-lg font-semibold flex flex-col items-start justify-start gap-2 border border-white/10 hover:border-white/20 transition-all duration-300'>
+                            <h1 className='text-white font-bold'>Let's find some podcasts to follow</h1>
+                            <p className='font-light text-sm'>We'll keep you updated on new episodes</p>
+                            <button className='px-4 py-1.5 bg-white text-black rounded-full mt-3 text-xs font-bold hover:bg-gray-200 hover:scale-105 transition-transform duration-300'>Browse podcasts</button>
                         </div>
-                    </>
+                    </div>
                 )}
             </div>
-
             {/* Logout Button */}
-            <div className='bg-[#1a1a1a] h-[10%] rounded-lg flex items-center justify-center border border-[#282828] hover:border-red-500 transition'>
+            <div className='bg-[#121212] h-[8%] rounded-lg flex items-center justify-center border-t border-white/10'>
                 <button
                     onClick={onLogout}
-                    className='px-6 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition font-bold flex items-center gap-2'
+                    className='px-6 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-all duration-300 font-bold flex items-center gap-2 text-sm'
                 >
-                    <svg className='w-5 h-5' fill='currentColor' viewBox='0 0 20 20'>
-                        <path fillRule='evenodd' d='M3 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z' clipRule='evenodd' />
-                    </svg>
+                    <svg className='w-5 h-5' fill='currentColor' viewBox='0 0 20 20' xmlns="http://www.w3.org/2000/svg"><path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L9 5.414V17a1 1 0 102 0V5.414l4.293 4.293a1 1 0 001.414-1.414l-7-7z"></path></svg>
                     Logout
                 </button>
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default Sidebar
+export default Sidebar;

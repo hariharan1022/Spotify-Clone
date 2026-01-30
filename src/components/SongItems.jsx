@@ -1,29 +1,23 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext } from 'react'
 import { PlayerContext } from '../context/PlayerContext'
 import { assets } from '../assets/assets'
 
 const SongItems = (props) => {
 
-  const { playWithId } = useContext(PlayerContext);
-  const [liked, setLiked] = useState(false);
-
-  const handleLike = (e) => {
-    e.stopPropagation();
-    setLiked(!liked);
-  };
+  const { playWithId } = useContext(PlayerContext) || {};
 
   return (
-    <div onClick={() => playWithId(props.id)} className='max-w-[200px] min-h-[100px] p-2 px-3 rounded cursor-pointer hover:bg-[#ffffff26] relative group transition-colors duration-300'>
+    <div onClick={() => playWithId && playWithId(props.id)} className='w-full md:w-auto min-w-[180px] max-w-[220px] p-3 rounded-lg cursor-pointer bg-[#181818] hover:bg-[#282828]/80 transition-all duration-300 group hover:scale-105'>
       <div className='relative'>
-        <img className='rounded min-w-[155px] max-h-[189px] w-full' src={props.image} alt="" />
-        <div className='absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center rounded'>
-          <button className='w-10 h-10 bg-[#1db954] rounded-full flex items-center justify-center shadow-lg transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300'>
-            <img src={assets.play_icon} alt="play" className='w-5 h-5 ml-1' />
+        <img className='rounded-lg w-full' src={props.image} alt={props.name} />
+        <div className='absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center rounded-lg'>
+          <button className='w-12 h-12 bg-green-500 rounded-full flex items-center justify-center shadow-xl transform transition-all duration-300 translate-y-2 group-hover:translate-y-0'>
+            <img src={assets.play_icon} alt="play" className='w-6 h-6 ml-0.5' />
           </button>
         </div>
       </div>
-      <p className='font-bold mt-2 mb-1 truncate'>{props.name}</p>
-      <p className='text-slate-200 text-sm truncate'>{props.desc}</p>
+      <p className='font-bold mt-3 mb-1 text-white text-base truncate'>{props.name}</p>
+      <p className='text-gray-400 text-sm truncate'>{props.desc}</p>
     </div>
   )
 }

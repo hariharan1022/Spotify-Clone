@@ -5,8 +5,9 @@ import Display from './Display'
 import Login from './Login'
 import { PlayerContext } from '../context/PlayerContext'
 
+
 const Home = () => {
-  const { audioRef, track } = useContext(PlayerContext) || {}
+  const { audioRef, track } = useContext(PlayerContext)
   const [isLoggedIn, setIsLoggedIn] = useState(false)
 
   useEffect(() => {
@@ -33,8 +34,8 @@ const Home = () => {
   return (
     <div className='h-screen bg-black'>
       <div className='h-[90%] flex'>
-        <Sidebar onLogout={handleLogout} />
-        <Display />
+          <Sidebar onLogout={handleLogout} />
+          <Display />
       </div>
       <Player />
       <audio ref={audioRef} src={track ? track.file : ""} preload='auto'></audio>

@@ -211,3 +211,54 @@ export const songsData = [
     duration: "4:22",
   },
 ];
+
+export const artistsData = [
+  {
+    id: 0,
+    name: "A.R Rahman",
+    image: arrmix,
+    desc: "Artist",
+  },
+  {
+    id: 1,
+    name: "Anirudh Ravichander",
+    image: romanticanirudh,
+    desc: "Artist",
+  },
+  {
+    id: 2,
+    name: "Ilaiyaraaja",
+    image: munpanikaadhal,
+    desc: "Artist",
+  },
+  {
+    id: 3,
+    name: "Yuvan Shankar Raja",
+    image: yuvan,
+    desc: "Artist",
+  },
+  {
+    id: 4,
+    name: "Harris Jayaraj",
+    image: dhaamdhoom,
+    desc: "Artist",
+  },
+  {
+    id: 5,
+    name: "D. Imman",
+    image: manithan,
+    desc: "Artist",
+  },
+  {
+    id: 6,
+    name: "GV Prakash Kumar",
+    image: aadukalam,
+    desc: "Artist",
+  },
+  {
+    id: 7,
+    name: "SP Balasubrahmanyam",
+    image: enpt,
+    desc: "Artist",
+  },
+];

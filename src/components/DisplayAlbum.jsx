@@ -45,32 +45,32 @@ const DisplayAlbum = () => {
                     <p className='text-3xl text-gray-400 cursor-pointer'>...</p>
                 </div>
             </div>
-            <div className='grid grid-cols-1 md:grid-cols-[0.5fr_2fr_1fr_1fr_0.5fr] mt-4 mb-4 px-4 text-[#a7a7a7] text-sm border-b border-white/10 pb-2'>
+            <div className='hidden md:grid grid-cols-[0.5fr_2fr_1fr_1fr_0.5fr] mt-10 mb-4 px-4 pl-2 text-[#a7a7a7] text-sm border-b border-white/10 pb-2 font-medium tracking-wider uppercase'>
                 <p><b className='mr-4'>#</b>Title</p>
-                <p className='col-start-3'>Album</p>
-                <p className='hidden md:block col-start-4'>Date Added</p>
-                <img className='m-auto w-4 col-start-5' src={assets.clock_icon} alt="" />
+                <p>Album</p>
+                <p className='hidden sm:block'>Date Added</p>
+                <img className='m-auto w-4' src={assets.clock_icon} alt="" />
             </div>
 
-            <div className='px-4'>
+            <div className='px-4 mb-20 md:mb-0'>
                 {
                     albumSongs.length > 0
                         ? albumSongs.map((item, index) => (
-                            <div onClick={() => playWithId && playWithId(item.id)} key={item.id} className='grid grid-cols-[0.5fr_2fr_1fr_1fr_0.5fr] gap-3 p-2 items-center text-[#a7a7a7] hover:bg-white/10 cursor-pointer group rounded-md'>
-                                <p className='text-white flex items-center'>
-                                    <span className='mr-4 text-[#a7a7a7] w-4 text-center group-hover:hidden'>{index + 1}</span>
-                                    <img className='mr-4 w-4 hidden group-hover:block' src={assets.play_icon} alt="" />
+                            <div onClick={() => playWithId && playWithId(item.id)} key={item.id} className='grid grid-cols-[auto_1fr_auto] md:grid-cols-[0.5fr_2fr_1fr_1fr_0.5fr] gap-4 md:gap-2 p-2 items-center text-[#a7a7a7] hover:bg-white/10 cursor-pointer group rounded-md transition-colors duration-300'>
+                                <p className='text-white hidden md:block'>
+                                    <span className='w-4 inline-block text-center group-hover:hidden'>{index + 1}</span>
+                                    <img className='w-4 hidden group-hover:inline-block' src={assets.play_icon} alt="" />
                                 </p>
-                                <div className='flex items-center gap-3'>
-                                    <img className='inline w-10 h-10 rounded' src={item.image} alt="" />
-                                    <div>
-                                        <p className='text-white text-sm font-semibold truncate'>{item.name}</p>
-                                        <p className='text-xs truncate'>Artist</p>
+                                <div className='flex items-center gap-3 md:col-start-2'>
+                                    <img className='inline w-12 h-12 md:w-10 md:h-10 rounded object-cover shadow-lg' src={item.image} alt="" />
+                                    <div className='flex flex-col'>
+                                        <p className='text-white text-base md:text-sm font-semibold truncate w-40 md:w-auto'>{item.name}</p>
+                                        <p className='text-xs text-gray-400 font-medium hover:underline cursor-pointer hover:text-white'>Artist Name</p>
                                     </div>
                                 </div>
-                                <p className='text-sm col-start-3'>{albumData.name}</p>
-                                <p className='text-sm hidden md:block col-start-4'>5 days ago</p>
-                                <p className='text-sm text-center col-start-5'>{item.duration}</p>
+                                <p className='text-sm hidden md:block hover:text-white cursor-pointer'>{albumData.name}</p>
+                                <p className='text-sm hidden md:block'>5 days ago</p>
+                                <p className='text-sm text-center md:text-center'>{item.duration}</p>
                             </div>
                         ))
                         : <p className='p-4 text-center text-gray-400'>No songs available in this playlist yet.</p>

@@ -45,23 +45,27 @@ Follow these steps to set up and run the project locally:
 1. **Clone the Repository**  
    ```bash
    git clone https://github.com/hariharan1022/Spotify-Clone
+   ```
 
 2. **Navigate to the Project Directory**  
    ```bash
    cd SpotifyClone
+   ```
 
 3. **Install Dependencies**  
    ```bash
    npm install
+   ```
 
 4. **Start the Development Server**  
    ```bash
-   npm start
+   npm run dev
+   ```
 
 ---
 
 ### Usage  
-Once the server starts, open your web browser and go to http://localhost:3000 to view the project in action.
+Once the server starts, open your web browser and go to the URL shown in the terminal (usually http://localhost:5173) to view the project in action.
 
 ### Screenshots  
 
@@ -74,11 +78,10 @@ Once the server starts, open your web browser and go to http://localhost:3000 to
 
 ---
 
-### Our Other Social Platforms
+### Connect with me
 
+- **Instagram**: [@hari_mahesh_sk](https://www.instagram.com/hari_mahesh_sk?igsh=MTJtajBsZHF0aDcy)
+- **Facebook**: [Profile](https://www.facebook.com/share/17pCE9MhmH/)
+- **LinkedIn**: [Hariharan S](https://www.linkedin.com/in/hariharan-s-92b566381?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app)
 
-- ![icon_logo](https://github.com/varun-FSDeveloper/BTreeFlight/assets/153975508/948141f8-8cdc-4ef1-9615-0fb06cd35574) Instagram - https://www.instagram.com/hari_mahesh_sk?igsh=MTJtajBsZHF0aDcy
-- ![Untitled design (10)](https://github.com/varun-FSDeveloper/BTreeFlight/assets/153975508/51189b66-5f75-43fc-a992-dca4805152a0) Facebook -https://www.facebook.com/share/17pCE9MhmH/
-- ![Untitled design (11)](https://github.com/varun-FSDeveloper/BTreeFlight/assets/153975508/0177cf07-7034-41fb-a41c-e292b2eea000) LinkedIn - https://www.linkedin.com/in/hariharan-s-92b566381?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app
-
--- Hariharan#
+-- Hariharan

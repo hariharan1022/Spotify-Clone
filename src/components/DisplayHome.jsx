@@ -1,7 +1,8 @@
 import React, { useContext } from "react";
-import { albumsData, songsData } from "../assets/assets";
+import { albumsData, songsData, artistsData } from "../assets/assets";
 import AlbumItems from "./AlbumItems";
 import SongItems from "./SongItems";
+import ArtistItem from "./ArtistItem";
 import { PlayerContext } from "../context/PlayerContext";
 
 const DisplayHome = () => {
@@ -76,6 +77,25 @@ const DisplayHome = () => {
           <p className="text-gray-400">Welcome back to your musical world.</p>
         </div>
 
+        {/* Popular Artists */}
+        <div className="mb-8">
+          <div className="flex items-center justify-between mb-5">
+            <h1 className="font-bold text-2xl text-white hover:underline cursor-pointer">Popular Artists</h1>
+            <a href="#" className="text-gray-400 hover:text-white transition text-sm font-semibold">Show all</a>
+          </div>
+          <div className="flex overflow-auto gap-4 pb-4 no-scrollbar">
+            {artistsData.map((item, index) => (
+              <ArtistItem
+                key={index}
+                name={item.name}
+                desc={item.desc}
+                id={item.id}
+                image={item.image}
+              />
+            ))}
+          </div>
+        </div>
+
         {/* Top Playlists */}
         <div className="mb-8">
           <div className="flex items-center justify-between mb-5">
@@ -85,6 +105,25 @@ const DisplayHome = () => {
           <div className="flex overflow-auto gap-4 pb-4">
             {albumsData.slice(0, 8).map((item, index) => (
               <AlbumItems
+                key={index}
+                name={item.name}
+                desc={item.desc}
+                id={item.id}
+                image={item.image}
+              />
+            ))}
+          </div>
+        </div>
+
+        {/* Trending Now */}
+        <div className="mb-8">
+          <div className="flex items-center justify-between mb-5">
+            <h1 className="font-bold text-2xl text-white hover:underline cursor-pointer">Trending Now</h1>
+            <a href="#" className="text-gray-400 hover:text-white transition text-sm font-semibold">Show all</a>
+          </div>
+          <div className="flex overflow-auto gap-4 pb-4 no-scrollbar">
+            {songsData.slice(4, 12).map((item, index) => (
+              <SongItems
                 key={index}
                 name={item.name}
                 desc={item.desc}
@@ -114,14 +153,14 @@ const DisplayHome = () => {
           </div>
         </div>
 
-        {/* Trending Now */}
-        <div className="mb-16">
+        {/* All Songs / New Additions */}
+        <div className="mb-24">
           <div className="flex items-center justify-between mb-5">
-            <h1 className="font-bold text-2xl text-white">Trending Now</h1>
+            <h1 className="font-bold text-2xl text-white hover:underline cursor-pointer">All Songs</h1>
             <a href="#" className="text-gray-400 hover:text-white transition text-sm font-semibold">Show all</a>
           </div>
-          <div className="flex overflow-auto gap-4 pb-4">
-            {songsData.slice(4, 12).map((item, index) => (
+          <div className="flex overflow-auto gap-4 pb-4 no-scrollbar">
+            {songsData.map((item, index) => (
               <SongItems
                 key={index}
                 name={item.name}
@@ -136,3 +175,5 @@ const DisplayHome = () => {
     </>
   );
 };
+
+export default DisplayHome;

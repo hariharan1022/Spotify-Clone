@@ -1,24 +1,27 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState, useContext } from 'react'
 import Home from './components/Home'
 import Opening from './components/Opening'
+import { PlayerContext } from './context/PlayerContext'
 
 function App() {
 
- const [isSplashVisible, setSplashVisible] = useState(true);
+  const { audioRef, track } = useContext(PlayerContext);
 
- useEffect(()=>{
-  const timer = setTimeout(()=>{
-    setSplashVisible(false);
-  },4000)
+  const [isSplashVisible, setSplashVisible] = useState(true);
 
-  return ()=> clearTimeout(timer);
- },[])
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setSplashVisible(false);
+    }, 4000)
+
+    return () => clearTimeout(timer);
+  }, [])
 
 
   return (
     <>
-    {isSplashVisible && <Opening/>}
-    <Home/>
+      {isSplashVisible ? <Opening /> : <Home />}
+      <audio ref={audioRef} src={track ? track.file : ""} preload='auto'></audio>
     </>
   )
 }

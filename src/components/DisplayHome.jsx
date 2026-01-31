@@ -80,7 +80,7 @@ const DisplayHome = () => {
         {/* Popular Artists */}
         <div className="mb-8">
           <div className="flex items-center justify-between mb-5">
-            <h1 className="font-bold text-2xl text-white hover:underline cursor-pointer">Popular Artists</h1>
+            <h1 className="font-bold text-2xl text-white hover:underline cursor-pointer">Popular artists</h1>
             <a href="#" className="text-gray-400 hover:text-white transition text-sm font-semibold">Show all</a>
           </div>
           <div className="flex overflow-auto gap-4 pb-4 no-scrollbar">
@@ -96,10 +96,10 @@ const DisplayHome = () => {
           </div>
         </div>
 
-        {/* Top Playlists */}
+        {/* Popular Albums */}
         <div className="mb-8">
           <div className="flex items-center justify-between mb-5">
-            <h1 className="font-bold text-2xl text-white">Popular Playlists</h1>
+            <h1 className="font-bold text-2xl text-white hover:underline cursor-pointer">Popular albums and singles</h1>
             <a href="#" className="text-gray-400 hover:text-white transition text-sm font-semibold">Show all</a>
           </div>
           <div className="flex overflow-auto gap-4 pb-4">

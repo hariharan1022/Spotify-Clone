@@ -145,6 +145,21 @@ const Sidebar = ({ onLogout }) => {
                         </div>
                     </div>
                 )}
+
+                {/* Footer Links and Language */}
+                <div className='p-6 mt-4'>
+                    <div className='flex flex-wrap gap-x-4 gap-y-2 mb-6'>
+                        {['Legal', 'Safety & Privacy Center', 'Privacy Policy', 'Cookies', 'About Ads', 'Accessibility'].map((link) => (
+                            <a key={link} href="#" className='text-[11px] text-gray-400 hover:underline hover:text-white transition-colors'>{link}</a>
+                        ))}
+                        <a href="#" className='text-[11px] text-gray-400 hover:underline hover:text-white transition-colors'>Cookies</a>
+                    </div>
+
+                    <button className='flex items-center gap-2 px-3 py-1.5 border border-[#727272] hover:border-white rounded-full text-white text-sm font-bold bg-transparent hover:scale-105 transition-all'>
+                        <img src={assets.search_icon} className='w-4 h-4 invert' alt="Globe" />
+                        English
+                    </button>
+                </div>
             </div>
             {/* Logout Button */}
             <div className='bg-[#121212] h-[8%] rounded-lg flex items-center justify-center border-t border-white/10'>

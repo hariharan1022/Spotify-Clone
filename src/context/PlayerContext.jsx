@@ -70,8 +70,11 @@ const PlayerContextProvider = (props) => {
     }
   }
 
-  const seekBgClick = async (e) => {
-    audioRef.current.currentTime = ((e.nativeEvent.offsetX / seekBg.current.offsetWidth) * audioRef.current.duration)
+  const seekBgClick = (e) => {
+    const rect = seekBg.current.getBoundingClientRect();
+    const offsetX = e.clientX - rect.left;
+    const progress = offsetX / rect.width;
+    audioRef.current.currentTime = progress * audioRef.current.duration;
   }
   const contextValue = {
     audioRef,

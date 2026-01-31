@@ -41,6 +41,14 @@ import munpanikaadhal from "./img/munpani-kaadhal.jpg";
 import purelykaadhal from "./img/purely-kaadhal.jpg";
 import romanticanirudh from "./img/romantic-anirudh.jpg";
 import yuvan from "./img/yuvan.jpg";
+import dimman from "./img/d.imman.jpeg";
+import gvprakash from "./img/gv prakash.jpeg";
+import harrisjayaraj from "./img/harris jayaraj.jpeg";
+import ilaiyaraja_img from "./img/ilaiyaraaja.jpeg";
+import spb from "./img/sp balasubrahmanyam.jpeg";
+import ar_rahman_img from "./img/ar_rahman.png";
+import anirudh_img from "./img/anirudh.png";
+import yuvan_img from "./img/yuvan_portrait.png";
 
 import aaruyire from "./songs/Aaruyire.mp3";
 import naanpilaipeno from "./songs/Naan-Pizhaippeno.mp3";
@@ -216,49 +224,49 @@ export const artistsData = [
   {
     id: 0,
     name: "A.R Rahman",
-    image: arrmix,
+    image: ar_rahman_img,
     desc: "Artist",
   },
   {
     id: 1,
     name: "Anirudh Ravichander",
-    image: romanticanirudh,
+    image: anirudh_img,
     desc: "Artist",
   },
   {
     id: 2,
     name: "Ilaiyaraaja",
-    image: munpanikaadhal,
+    image: ilaiyaraja_img,
     desc: "Artist",
   },
   {
     id: 3,
     name: "Yuvan Shankar Raja",
-    image: yuvan,
+    image: yuvan_img,
     desc: "Artist",
   },
   {
     id: 4,
     name: "Harris Jayaraj",
-    image: dhaamdhoom,
+    image: harrisjayaraj,
     desc: "Artist",
   },
   {
     id: 5,
     name: "D. Imman",
-    image: manithan,
+    image: dimman,
     desc: "Artist",
   },
   {
     id: 6,
     name: "GV Prakash Kumar",
-    image: aadukalam,
+    image: gvprakash,
     desc: "Artist",
   },
   {
     id: 7,
     name: "SP Balasubrahmanyam",
-    image: enpt,
+    image: spb,
     desc: "Artist",
   },
 ];

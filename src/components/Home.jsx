@@ -3,6 +3,7 @@ import Sidebar from './Sidebar'
 import Player from './Player'
 import Display from './Display'
 import Login from './Login'
+import BottomNav from './BottomNav'
 
 
 const Home = () => {
@@ -30,12 +31,13 @@ const Home = () => {
   }
 
   return (
-    <div className='h-screen bg-black'>
-      <div className='h-[90%] flex'>
+    <div className='h-[100dvh] bg-black flex flex-col'>
+      <div className='flex-1 flex overflow-hidden'>
         <Sidebar onLogout={handleLogout} />
         <Display />
       </div>
       <Player />
+      <BottomNav />
     </div>
   )
 }
